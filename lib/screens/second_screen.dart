@@ -6,9 +6,16 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          MaterialButton(onPressed: () {}, child: const Text("Home Page")),
-      appBar: AppBar(title: const Text("Connectivity - Second Page")),
+      floatingActionButton: MaterialButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: Theme.of(context).colorScheme.primary,
+          child: Text(
+            "Home Page",
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          )),
+      appBar: AppBar(title: const Text("Second Page")),
     );
   }
 }
