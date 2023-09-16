@@ -4,26 +4,41 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_connectivity/bloc/bloc.dart';
 
 class InternetStatusWidget extends StatelessWidget {
-  const InternetStatusWidget({super.key, required this.child});
+  const InternetStatusWidget(
+      {super.key,
+      required this.child,
+      this.setDefaultIsConnected = false,
+      this.disable = false});
+
+  final bool setDefaultIsConnected;
+
+  final bool disable;
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    if (disable) {
+      return child;
+    }
+
     return BlocProvider(
       create: (context) => InternetStatusCubit(),
-      child: BlocBuilder<InternetStatusCubit, bool>(
+      child: BlocBuilder<InternetStatusCubit, bool?>(
         builder: (context, isConnectedState) {
+          isConnectedState ??= setDefaultIsConnected;
           return WillPopScope(
-            onWillPop: ()async{
-              return isConnectedState;
+            onWillPop: () async {
+              return isConnectedState!;
             },
             child: Material(
               child: Stack(
                 children: [
                   child,
                   AnimatedSlide(
-                    offset: isConnectedState == false ? Offset.zero : const Offset(0, 1),
+                    offset: isConnectedState == false
+                        ? Offset.zero
+                        : const Offset(0, 1),
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOutQuint,
                     child: Container(

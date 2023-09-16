@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-class InternetStatusCubit extends Cubit<bool> {
+class InternetStatusCubit extends Cubit<bool?> {
   final InternetConnectionChecker _internetConnectionChecker =
       InternetConnectionChecker();
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> connectivitySubscription;
 
-  InternetStatusCubit() : super(true) {
+  InternetStatusCubit() : super(null) {
     connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((result) {
       if (result != ConnectivityResult.none) {

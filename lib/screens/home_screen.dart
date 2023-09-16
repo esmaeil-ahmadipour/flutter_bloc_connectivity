@@ -8,6 +8,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InternetStatusWidget(
+      // setDefaultIsConnected: true,
+      // disable: true,
       child: Scaffold(
         floatingActionButton: MaterialButton(
           onPressed: () {
@@ -15,7 +17,8 @@ class HomePage extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    const InternetStatusWidget(child: SecondPage()),
+                    const InternetStatusWidget(
+                        child: SecondPage()),
               ),
             );
           },
