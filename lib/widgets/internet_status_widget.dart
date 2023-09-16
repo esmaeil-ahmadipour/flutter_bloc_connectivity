@@ -25,50 +25,45 @@ class InternetStatusWidget extends StatelessWidget {
     return BlocBuilder<InternetStatusCubit, bool?>(
       builder: (context, isConnectedState) {
         isConnectedState ??= setDefaultIsConnected;
-        return WillPopScope(
-          onWillPop: () async {
-            return isConnectedState!;
-          },
-          child: Material(
-            child: Stack(
-              children: [
-                child,
-                AnimatedSlide(
-                  offset: isConnectedState == false
-                      ? Offset.zero
-                      : const Offset(0, 1),
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOutQuint,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        gradient: RadialGradient(colors: [
-                      Colors.black.withOpacity(0.75),
-                      Colors.black.withOpacity(0.75),
-                      Colors.black
-                    ])),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Internet Is Disconnected !?",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 3,
-                          width: double.infinity,
-                          child: const FlareActor(
-                              'assets/animation/anim_disconnected.flr',
-                              alignment: Alignment.center,
-                              fit: BoxFit.fitHeight,
-                              animation: "idle"),
-                        ),
-                      ],
-                    ),
+        return Material(
+          child: Stack(
+            children: [
+            child,
+              AnimatedSlide(
+                offset: isConnectedState == false
+                    ? Offset.zero
+                    : const Offset(0, 1),
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOutQuint,
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: RadialGradient(colors: [
+                    Colors.black.withOpacity(0.75),
+                    Colors.black.withOpacity(0.75),
+                    Colors.black
+                  ])),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Internet Is Disconnected !?",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 3,
+                        width: double.infinity,
+                        child: const FlareActor(
+                            'assets/animation/anim_disconnected.flr',
+                            alignment: Alignment.center,
+                            fit: BoxFit.fitHeight,
+                            animation: "idle"),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
